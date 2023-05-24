@@ -2,8 +2,16 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: redis
-  namespace: <your_namespace_previously_created>
+  namespace: k8-workshop
 spec:
   # complete
   # depending on the provider, this may be necessary
-  # storageClassName: standard # this is the default value for minikube, means that you don't need to pass it
+  # this is the default value for minikube, means that you don't need to pass it
+  storageClassName: standard 
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests: 
+      storage: 1Gi
+
+

@@ -2,9 +2,35 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: webapp
-  namespace: <your_namespace_previously_created>
+  namespace: k8-workshop
 spec:
   ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: webapp
+      port:
+        number: 80
+
   rules:
   - host: webapp.aettua
     # complete
+    http:
+      paths:
+        - path: /
+          backend:
+            service:
+              name: webapp
+              port:
+                number: 80
+          pathType: Prefix
+        
+        # - path: /bd
+        #   backend: 
+        #     service: 
+        #       name: redis
+        #       port:
+        #         number: 6379
+        #   pathType: Prefix
+
+
+
