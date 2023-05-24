@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp
-  namespace: <your_namespace_previously_created>
+  namespace: k8-workshop
 spec:
   replicas: 1
   selector:
@@ -16,15 +16,30 @@ spec:
       containers:
       - name: webapp
         # complete with the image and tag fields
-        env:
+        image: ghcr.io/ydataai/docker-workshop:1.1 
+        env: 
+          - name: FLASK_PORT
+            value: '8001'
+          - name: REDIS_HOST
+            value: localhost
+          - name: REDIS_PORT
+            value: "8000"
+
         # complete with the PORT to expose the webapp
-        ports:
+        ports: 
+          - containerPort: 8001
         # complete to expose the ports in the container
       - name: redis
         # complete with the image and tag fields
+        image: ghcr.io/ydataai/bitnami-redis:7.0.11
         env:
         - name: ALLOW_EMPTY_PASSWORD
-          value: yes
+          value: 'yes'
+        - name: REDIS_PORT_NUMBER
+          value: "8000"
+        
         # complete with the PORT to expose the redis
         ports:
+          - containerPort: 8000
+
         # complete to expose the ports in the container

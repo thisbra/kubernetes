@@ -2,14 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: webapp
-  namespace: <your_namespace_previously_created>
+  namespace: k8-workshop
 spec:
   selector:
     app: webapp
   ports:
   - name: http
     # complete
-    port: # port to expose
-    targetPort: # port in the container
-  - name: redis
-    # complete
+    port: 80
+    targetPort: 8001
